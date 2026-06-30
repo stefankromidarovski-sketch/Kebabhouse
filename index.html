@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kebab House – Södertälje</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --c-red:       #A61B1B;
+      --c-red-dark:  #7A0F0F;
+      --c-gold:      #D4AF37;
+      --c-dark:      #0F0F0F;
+      --c-dark-soft: #1A1A1A;
+      --c-white:     #FFFFFF;
+      --c-light-bg:  #F8F8F8;
+      --f-heading:   'Cormorant Garamond', serif;
+      --f-body:      'Montserrat', sans-serif;
+      --s-gutter:    1.5rem;
+      --s-section:   4rem;
+    }
+    @media (min-width: 992px) { :root { --s-section: 6rem; } }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--f-body);
+      color: var(--c-dark);
+      background-color: var(--c-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────── NAVBAR ─────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 72px;
+      background: rgba(10, 10, 10, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .navbar-logo img {
+      height: 50px;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 2.5rem;
+    }
+    .navbar-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .navbar-links a:hover { color: var(--c-gold); }
+    .navbar-links .nav-cta {
+      background: var(--c-red);
+      color: #fff !important;
+      padding: 0.5rem 1.4rem;
+      border-radius: 3px;
+      transition: background 0.2s, box-shadow 0.25s !important;
+      box-shadow: 0 0 10px rgba(166,27,27,0.4);
+    }
+    .navbar-links .nav-cta:hover {
+      background: var(--c-red-dark) !important;
+      box-shadow: 0 0 22px rgba(166,27,27,0.85), 0 0 48px rgba(166,27,27,0.45) !important;
+    }
+
+    /* Language toggle */
+    .lang-toggle {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.75);
+      font-family: var(--f-body);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+      margin-left: -0.5rem;
+    }
+    .lang-toggle:hover {
+      border-color: var(--c-gold);
+      color: var(--c-gold);
+      box-shadow: 0 0 12px rgba(212,175,55,0.35);
+    }
+
+    /* ─────────────────── HERO ─────────────────── */
+    .hero {
+      height: 100vh;
+      min-height: 640px;
+      display: grid;
+      grid-template-columns: 1fr 1.35fr 1fr;
+      position: relative;
+    }
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.60);
+    }
+    /* center column */
+    .hero-center {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.75rem;
+      color: #fff;
+      z-index: 2;
+      background: rgba(0,0,0,0.68);
+    }
+    .hero-center-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.38;
+      z-index: -1;
+    }
+    .hero-logo {
+      width: min(230px, 72%);
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 14px 22px;
+      margin-bottom: 1.75rem;
+      box-shadow:
+        0 0 0 3px rgba(212,175,55,0.55),
+        0 0 28px rgba(212,175,55,0.45),
+        0 0 60px rgba(212,175,55,0.2),
+        0 8px 32px rgba(0,0,0,0.7);
+    }
+    .hero-tagline {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+      max-width: 290px;
+      line-height: 1.85;
+      margin-bottom: 2.25rem;
+      background: rgba(0,0,0,0.52);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 0.75rem 1.1rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.95);
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      font-family: var(--f-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s, box-shadow 0.25s, transform 0.25s, border-color 0.25s, color 0.25s;
+    }
+    .btn-red {
+      background: var(--c-red);
+      color: #fff;
+      box-shadow: 0 0 18px rgba(166,27,27,0.7), 0 0 40px rgba(166,27,27,0.35);
+    }
+    .btn-red:hover {
+      background: var(--c-red-dark);
+      box-shadow: 0 0 32px rgba(166,27,27,1), 0 0 70px rgba(166,27,27,0.65), 0 0 110px rgba(166,27,27,0.3);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.75);
+      box-shadow: 0 0 18px rgba(255,255,255,0.15), inset 0 0 12px rgba(255,255,255,0.04);
+    }
+    .btn-ghost:hover {
+      background: rgba(212,175,55,0.12);
+      border-color: var(--c-gold);
+      color: var(--c-gold);
+      box-shadow: 0 0 28px rgba(212,175,55,0.75), 0 0 60px rgba(212,175,55,0.4), inset 0 0 16px rgba(212,175,55,0.08);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      color: rgba(255,255,255,0.5);
+      font-size: 1rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* ─────────────────── SHARED SECTION ─────────────────── */
+    .section { padding: var(--s-section) 0; }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 var(--s-gutter); }
+
+    .eyebrow {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-red);
+      margin-bottom: 0.65rem;
+    }
+    .heading {
+      font-family: var(--f-heading);
+      font-size: clamp(2rem, 3.8vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.12;
+      color: var(--c-dark);
+    }
+
+    /* ─────────────────── ABOUT ─────────────────── */
+    .about-section { background: var(--c-dark-soft); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: var(--c-red);
+      color: #fff;
+      width: 110px;
+      height: 110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .about-badge .big {
+      font-family: var(--f-heading);
+      font-size: 2.6rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .about-badge .small {
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+    .about-body { padding-top: 0.5rem; }
+    .about-body .heading { margin: 0.65rem 0 1.25rem; color: #fff; }
+    .about-body p {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 1rem;
+      line-height: 1.9;
+    }
+    .about-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .stat-num {
+      font-family: var(--f-heading);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--c-red);
+      line-height: 1;
+    }
+    .stat-lbl {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-top: 4px;
+    }
+
+    /* ─────────────────── PROCESS ─────────────────── */
+    .process-section { background: var(--c-dark); }
+    .process-section .eyebrow { color: var(--c-red); }
+    .process-section .heading { color: #fff; }
+    .process-head { text-align: center; margin-bottom: 3rem; }
+    .process-head .heading { margin-top: 0.65rem; }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    .process-card {
+      background: var(--c-dark-soft);
+      padding: 2rem 1.5rem 1.75rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .process-card:hover {
+      border-color: var(--c-red);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+    }
+    .process-icon {
+      color: var(--c-red);
+      font-size: 1.3rem;
+      margin-bottom: 1.25rem;
+    }
+    .process-card h3 {
+      font-family: var(--f-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+      color: #fff;
+    }
+    .process-card p {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+    }
+
+    /* ─────────────────── MENU ─────────────────── */
+    .menu-section { background: var(--c-dark-soft); }
+    .menu-img-wrap {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.6);
+    }
+    .menu-img-wrap img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* ─────────────────── GALLERY ─────────────────── */
+    .gallery-section { padding-bottom: 0; background: var(--c-dark); }
+    .gallery-section .eyebrow { color: var(--c-red); }
+    .gallery-section .heading { color: #fff; }
+    .gallery-section .container { margin-bottom: 2.5rem; }
+    .gallery-section .heading { margin-top: 0.65rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .gallery-item { position: relative; overflow: hidden; height: 300px; }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.55s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.07); }
+
+    /* ─────────────────── FOOTER ─────────────────── */
+    .footer {
+      background: var(--c-dark);
+      color: rgba(255,255,255,0.55);
+    }
+    .footer-body {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1.5fr;
+      gap: 3rem;
+      padding: 5rem var(--s-gutter) 4rem;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .footer-brand img {
+      height: 54px;
+      border-radius: 6px;
+      object-fit: contain;
+      margin-bottom: 1.1rem;
+    }
+    .footer-brand p {
+      font-size: 0.8rem;
+      font-weight: 300;
+      line-height: 1.85;
+      max-width: 250px;
+      margin-bottom: 1.5rem;
+    }
+    .footer-social { display: flex; gap: 0.6rem; }
+    .footer-social a {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.55);
+      font-size: 0.82rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .footer-social a:hover { border-color: var(--c-gold); color: var(--c-gold); }
+    .footer-col-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 1.5rem;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.7rem; }
+    .footer-links a {
+      color: rgba(255,255,255,0.48);
+      text-decoration: none;
+      font-size: 0.83rem;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--c-gold); }
+    .footer-contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.83rem;
+      font-weight: 300;
+    }
+    .footer-contact-row i {
+      color: var(--c-red);
+      font-size: 0.78rem;
+      margin-top: 0.28rem;
+      flex-shrink: 0;
+      width: 14px;
+    }
+    .footer-contact-row a {
+      color: rgba(255,255,255,0.48);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-contact-row a:hover { color: var(--c-gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      text-align: center;
+      padding: 1.4rem;
+      font-size: 0.73rem;
+      color: rgba(255,255,255,0.28);
+    }
+
+    /* ─────────────────── RESPONSIVE ─────────────────── */
+    @media (max-width: 992px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-panel:not(.hero-center) { display: none; }
+      .hero-center { min-height: 100vh; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-img-wrap { order: -1; }
+      .about-img-wrap img { height: 300px; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .footer-body { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 768px) {
+      .navbar { padding: 0 1.25rem; }
+      .navbar-links { display: none; }
+      .process-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav class="navbar">
+  <div class="navbar-logo">
+    <a href="#"><img src="kebablogo.jpg" alt="Kebab House" /></a>
+  </div>
+  <ul class="navbar-links">
+    <li><a href="#about" data-i18n="nav_about">Om Oss</a></li>
+    <li><a href="#process" data-i18n="nav_process">Vår Process</a></li>
+    <li><a href="#menu" data-i18n="nav_menu">Meny</a></li>
+    <li><a href="#gallery" data-i18n="nav_gallery">Galleri</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Kontakt</a></li>
+    <li><a href="#menu" class="nav-cta" data-i18n="nav_cta">Meny</a></li>
+    <li><button class="lang-toggle" id="lang-toggle" onclick="toggleLang()">EN</button></li>
+  </ul>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+
+  <!-- Left panel -->
+  <div class="hero-panel">
+    <img src="8a5866c0-747f-11ec-8547-ced664f55e03_campino_sverige_special__1_.jpg" alt="Campino Sverige Special" />
+  </div>
+
+  <!-- Center panel -->
+  <div class="hero-center">
+    <img class="hero-center-bg" src="ysm60cyce3291.jpg" alt="" />
+    <img class="hero-logo" src="kebablogo.jpg" alt="Kebab House" />
+    <p class="hero-tagline" data-i18n="hero_tagline">Äkta smaker som aldrig förändras – välkommen till Kebab House i Södertälje.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-red" data-i18n="hero_menu_btn">Meny</a>
+      <a href="#contact" class="btn btn-ghost">
+        <i class="fa-solid fa-location-dot"></i> <span data-i18n="hero_find_us">Hitta oss</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Right panel -->
+  <div class="hero-panel">
+    <img src="per-morbergs-fish-and-chips.jpg" alt="Fish and Chips" />
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero-scroll">
+    <i class="fa-solid fa-chevron-down"></i>
+  </div>
+
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about" class="section about-section">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-img-wrap">
+        <img
+          src="bombom.jpg"
+          alt="Vår Historia"
+        />
+        <div class="about-badge">
+          <span class="big">30+</span>
+          <span class="small" data-i18n="about_badge">Års<br/>erfarenhet</span>
+        </div>
+      </div>
+
+      <div class="about-body">
+        <span class="eyebrow" data-i18n="about_eyebrow">Vår Historia</span>
+        <h2 class="heading" data-i18n="about_heading">Smakens historia</h2>
+        <p data-i18n="about_p1">Kebab House är Södertäljes hjärta för autentisk kebab. Vi har i decennier serverat gäster med det bästa av halalcertifierat kött, tillagat med kärlek och hantverksskicklighet.</p>
+        <p data-i18n="about_p2">Vår filosofi är enkel: färska råvaror, genuin smak och hjärtlig service. Från snabb lunch till sen kvällsmåltid på fredag och lördag – vi finns alltid här för dig.</p>
+        <div class="about-stats">
+          <div>
+            <div class="stat-num">452</div>
+            <div class="stat-lbl" data-i18n="about_reviews">Google-recensioner</div>
+          </div>
+          <div style="width:1px; background:rgba(255,255,255,0.15); align-self:stretch;"></div>
+          <div>
+            <div class="stat-num">4.1</div>
+            <div class="stat-lbl" data-i18n="about_rating">Betyg</div>
+          </div>
+          <div style="width:1px; background:rgba(255,255,255,0.15); align-self:stretch;"></div>
+          <div>
+            <div class="stat-num">50+</div>
+            <div class="stat-lbl" data-i18n="about_guests">Nöjda gäster / dag</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROCESS ══════════ -->
+<section id="process" class="section process-section">
+  <div class="container">
+    <div class="process-head">
+      <span class="eyebrow" data-i18n="process_eyebrow">Vår Process</span>
+      <h2 class="heading" data-i18n="process_heading">Hemligheten bakom smaken</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-icon"><i class="fa-solid fa-leaf"></i></div>
+        <h3 data-i18n="process1_title">Färska råvaror</h3>
+        <p data-i18n="process1_desc">Vi väljer noga ut de bästa råvarorna varje dag och marinerar köttet med egna hemliga recept.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
+        <h3 data-i18n="process2_title">Halalcertifierat</h3>
+        <p data-i18n="process2_desc">Allt kött är halalcertifierat och tillagat med respekt och omsorg för varje gästs önskemål.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-icon"><i class="fa-solid fa-utensils"></i></div>
+        <h3 data-i18n="process3_title">Erfarna händer</h3>
+        <p data-i18n="process3_desc">Med lång erfarenhet i köket levererar vi konsekvent hög kvalitet i varje portion vi serverar.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-icon"><i class="fa-solid fa-face-smile"></i></div>
+        <h3 data-i18n="process4_title">Hjärtlig service</h3>
+        <p data-i18n="process4_desc">Vår personal välkomnar dig med ett leende – vi ser till att ditt besök blir minnesvärdt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MENU ══════════ -->
+<section id="menu" class="section menu-section">
+  <div class="container">
+    <span class="eyebrow" data-i18n="menu_eyebrow">Vår Meny</span>
+    <h2 class="heading" style="color:#fff; margin-top:0.65rem; margin-bottom:2.5rem;" data-i18n="menu_heading">Vad vill du ha idag?</h2>
+    <div class="menu-img-wrap">
+      <img src="meny.jpg" alt="Kebab House meny" />
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GALLERY ══════════ -->
+<section id="gallery" class="section gallery-section">
+  <div class="container">
+    <span class="eyebrow" data-i18n="gallery_eyebrow">Galleri</span>
+    <h2 class="heading" data-i18n="gallery_heading">Smakfulla ögonblick</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img
+        src="kebab-tallrik-ris-potatismos.jpg"
+        alt="Kebab tallrik"
+      />
+    </div>
+    <div class="gallery-item">
+      <img
+        src="creamy_roasted_red_91087_16x9.jpg"
+        alt="Pasta"
+      />
+    </div>
+    <div class="gallery-item">
+      <img
+        src="istockphoto-860985288-612x612.jpg"
+        alt="Kebab"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer id="contact" class="footer">
+  <div class="footer-body">
+
+    <!-- Brand -->
+    <div class="footer-brand">
+      <img src="kebablogo.jpg" alt="Kebab House" />
+      <p data-i18n="footer_brand_p">Genuin smak och hjärtlig service. Södertäljes favorit för kebab – välkommen in.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick links -->
+    <div>
+      <p class="footer-col-title" data-i18n="footer_quicklinks">Snabblänkar</p>
+      <ul class="footer-links">
+        <li><a href="#about" data-i18n="nav_about">Om Oss</a></li>
+        <li><a href="#process" data-i18n="nav_process">Vår Process</a></li>
+        <li><a href="#gallery" data-i18n="nav_gallery">Galleri</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">Kontakt</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <p class="footer-col-title" data-i18n="footer_contact_col">Kontakt</p>
+      <div class="footer-contact-row">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>Köpmangatan 12, 151 71 Södertälje</span>
+      </div>
+      <div class="footer-contact-row">
+        <i class="fa-solid fa-phone"></i>
+        <a href="tel:0855039417">08-550 394 17</a>
+      </div>
+
+      <p class="footer-col-title" style="margin-top: 2rem;" data-i18n="footer_hours_title">Öppettider</p>
+      <div class="footer-contact-row">
+        <i class="fa-regular fa-clock"></i>
+        <span data-i18n="footer_hours">Mån–Tor: 11:00–21:00<br/>Fre–Lör: 11:00–03:00<br/>Sön: 12:00–21:00</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span data-i18n="footer_copyright">© 2026 Kebab House. Alla rättigheter förbehållna.</span>
+  </div>
+</footer>
+
+<script>
+  const i18n = {
+    sv: {
+      nav_about:       'Om Oss',
+      nav_process:     'Vår Process',
+      nav_menu:        'Meny',
+      nav_gallery:     'Galleri',
+      nav_contact:     'Kontakt',
+      nav_cta:         'Meny',
+      hero_tagline:    'Äkta smaker som aldrig förändras – välkommen till Kebab House i Södertälje.',
+      hero_menu_btn:   'Meny',
+      hero_find_us:    'Hitta oss',
+      about_eyebrow:   'Vår Historia',
+      about_heading:   'Smakens historia',
+      about_badge:     'Års<br/>erfarenhet',
+      about_p1:        'Kebab House är Södertäljes hjärta för autentisk kebab. Vi har i decennier serverat gäster med det bästa av halalcertifierat kött, tillagat med kärlek och hantverksskicklighet.',
+      about_p2:        'Vår filosofi är enkel: färska råvaror, genuin smak och hjärtlig service. Från snabb lunch till sen kvällsmåltid på fredag och lördag – vi finns alltid här för dig.',
+      about_reviews:   'Google-recensioner',
+      about_rating:    'Betyg',
+      about_guests:    'Nöjda gäster / dag',
+      process_eyebrow: 'Vår Process',
+      process_heading: 'Hemligheten bakom smaken',
+      process1_title:  'Färska råvaror',
+      process1_desc:   'Vi väljer noga ut de bästa råvarorna varje dag och marinerar köttet med egna hemliga recept.',
+      process2_title:  'Halalcertifierat',
+      process2_desc:   'Allt kött är halalcertifierat och tillagat med respekt och omsorg för varje gästs önskemål.',
+      process3_title:  'Erfarna händer',
+      process3_desc:   'Med lång erfarenhet i köket levererar vi konsekvent hög kvalitet i varje portion vi serverar.',
+      process4_title:  'Hjärtlig service',
+      process4_desc:   'Vår personal välkomnar dig med ett leende – vi ser till att ditt besök blir minnesvärdt.',
+      menu_eyebrow:    'Vår Meny',
+      menu_heading:    'Vad vill du ha idag?',
+      gallery_eyebrow: 'Galleri',
+      gallery_heading: 'Smakfulla ögonblick',
+      footer_brand_p:  'Genuin smak och hjärtlig service. Södertäljes favorit för kebab – välkommen in.',
+      footer_quicklinks:'Snabblänkar',
+      footer_contact_col:'Kontakt',
+      footer_hours_title:'Öppettider',
+      footer_hours:    'Mån–Tor: 11:00–21:00<br/>Fre–Lör: 11:00–03:00<br/>Sön: 12:00–21:00',
+      footer_copyright:'© 2026 Kebab House. Alla rättigheter förbehållna.',
+    },
+    en: {
+      nav_about:       'About Us',
+      nav_process:     'Our Process',
+      nav_menu:        'Menu',
+      nav_gallery:     'Gallery',
+      nav_contact:     'Contact',
+      nav_cta:         'Menu',
+      hero_tagline:    'Authentic flavors that never change – welcome to Kebab House in Södertälje.',
+      hero_menu_btn:   'Menu',
+      hero_find_us:    'Find Us',
+      about_eyebrow:   'Our Story',
+      about_heading:   'A Taste of History',
+      about_badge:     'Years of<br/>Experience',
+      about_p1:        'Kebab House is Södertälje\'s heart for authentic kebab. For decades we have served guests with the finest halal-certified meat, prepared with love and craftsmanship.',
+      about_p2:        'Our philosophy is simple: fresh ingredients, genuine taste, and warm service. From a quick lunch to a late Friday night meal – we are always here for you.',
+      about_reviews:   'Google Reviews',
+      about_rating:    'Rating',
+      about_guests:    'Happy guests / day',
+      process_eyebrow: 'Our Process',
+      process_heading: 'The Secret Behind the Taste',
+      process1_title:  'Fresh Ingredients',
+      process1_desc:   'We carefully select the finest ingredients every day and marinate the meat with our own secret recipes.',
+      process2_title:  'Halal Certified',
+      process2_desc:   'All meat is halal-certified and prepared with respect and care for every guest\'s wishes.',
+      process3_title:  'Experienced Hands',
+      process3_desc:   'With many years in the kitchen, we consistently deliver high quality in every portion we serve.',
+      process4_title:  'Warm Service',
+      process4_desc:   'Our staff welcomes you with a smile – we make sure your visit is one to remember.',
+      menu_eyebrow:    'Our Menu',
+      menu_heading:    'What Would You Like Today?',
+      gallery_eyebrow: 'Gallery',
+      gallery_heading: 'Flavorful Moments',
+      footer_brand_p:  'Genuine taste and warm service. Södertälje\'s favourite for kebab – welcome in.',
+      footer_quicklinks:'Quick Links',
+      footer_contact_col:'Contact',
+      footer_hours_title:'Opening Hours',
+      footer_hours:    'Mon–Thu: 11:00–21:00<br/>Fri–Sat: 11:00–03:00<br/>Sun: 12:00–21:00',
+      footer_copyright:'© 2026 Kebab House. All rights reserved.',
+    }
+  };
+
+  let currentLang = 'sv';
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const val = i18n[lang][key];
+      if (val !== undefined) {
+        el.innerHTML = val;
+      }
+    });
+    const btn = document.getElementById('lang-toggle');
+    if (btn) btn.textContent = lang === 'sv' ? 'EN' : 'SV';
+  }
+
+  function toggleLang() {
+    setLanguage(currentLang === 'sv' ? 'en' : 'sv');
+  }
+
+  // Default to Swedish on load
+  setLanguage('sv');
+</script>
+
+</body>
+</html>
