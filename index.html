@@ -218,6 +218,16 @@
       box-shadow: 0 0 28px rgba(212,175,55,0.75), 0 0 60px rgba(212,175,55,0.4), inset 0 0 16px rgba(212,175,55,0.08);
       transform: translateY(-2px);
     }
+    .btn-pink {
+      background: #E91E8C;
+      color: #fff;
+      box-shadow: 0 0 18px rgba(233,30,140,0.55), 0 0 40px rgba(233,30,140,0.25);
+    }
+    .btn-pink:hover {
+      background: #c4177a;
+      box-shadow: 0 0 32px rgba(233,30,140,0.9), 0 0 70px rgba(233,30,140,0.5);
+      transform: translateY(-2px);
+    }
 
     .hero-scroll {
       position: absolute;
@@ -370,38 +380,240 @@
       line-height: 1.8;
     }
 
-    /* ─────────────────── MENU ─────────────────── */
-    .menu-section { background: var(--c-dark-soft); }
-    .menu-img-wrap {
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 16px 60px rgba(0,0,0,0.6);
+    /* ─────────────────── OFFERS ─────────────────── */
+    .offers-section { background: var(--c-dark); }
+    .offers-section .eyebrow { color: var(--c-red); }
+    .offers-intro {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.55);
+      font-weight: 300;
+      max-width: 580px;
+      line-height: 1.85;
+      margin-bottom: 3rem;
     }
-    .menu-img-wrap img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 1100px) { .offers-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 992px)  { .offers-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px)  { .offers-grid { grid-template-columns: 1fr; } }
+
+    .offer-card {
+      background: var(--c-dark-soft);
+      padding: 1.75rem 1.4rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .offer-card:hover {
+      border-color: var(--c-red);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+    }
+    .offer-icon {
+      color: var(--c-red);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+    .offer-title {
+      font-family: var(--f-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--c-gold);
+      margin-bottom: 0.55rem;
+    }
+    .offer-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 0.75rem;
+    }
+    .offer-list li {
+      font-size: 0.76rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.85;
+    }
+    .offer-list li::before {
+      content: '✓';
+      margin-right: 0.45rem;
+      color: var(--c-red);
+      font-size: 0.68rem;
     }
 
-    /* ─────────────────── GALLERY ─────────────────── */
-    .gallery-section { padding-bottom: 0; background: var(--c-dark); }
-    .gallery-section .eyebrow { color: var(--c-red); }
-    .gallery-section .heading { color: #fff; }
-    .gallery-section .container { margin-bottom: 2.5rem; }
-    .gallery-section .heading { margin-top: 0.65rem; }
-    .gallery-grid {
+    /* ─────────────────── MENU ─────────────────── */
+    .menu-section { background: var(--c-dark-soft); }
+    .menu-btn-wrap { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* ─────────────────── MENU OVERLAY ─────────────────── */
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: var(--c-dark);
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .menu-overlay.open { transform: translateX(0); }
+    .menu-overlay-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+    }
+    .menu-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.75rem;
+      background: var(--c-red);
+      border: none;
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 16px rgba(166,27,27,0.6);
+      z-index: 2001;
+    }
+    .menu-close:hover { background: var(--c-red-dark); box-shadow: 0 0 28px rgba(166,27,27,0.9); }
+    .menu-overlay-title {
+      font-family: var(--f-heading);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .menu-category {
+      margin-bottom: 2.5rem;
+    }
+    .menu-category-title {
+      font-family: var(--f-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--c-gold);
+      margin-bottom: 0.25rem;
+    }
+    .menu-category-note {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item-left { display: flex; align-items: baseline; gap: 0.55rem; flex: 1; min-width: 0; }
+    .menu-item-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #fff;
+    }
+    .menu-item-desc {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.42);
+      font-weight: 300;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .menu-item-badge {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--c-red);
+      color: #fff;
+      padding: 0.15rem 0.45rem;
+      border-radius: 2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .menu-item-price {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--c-gold);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .menu-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 2rem 0;
+    }
+
+    /* ─────────────────── HITTA OSS ─────────────────── */
+    .findus-section { background: var(--c-dark); }
+    .findus-section .eyebrow { color: var(--c-red); }
+    .findus-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 380px;
+      gap: 3rem;
+      align-items: start;
     }
-    .gallery-item { position: relative; overflow: hidden; height: 300px; }
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.55s ease;
+    .findus-map {
+      height: 420px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.5);
     }
-    .gallery-item:hover img { transform: scale(1.07); }
+    .findus-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .findus-info-card {
+      display: flex;
+      gap: 1.1rem;
+      align-items: flex-start;
+      background: var(--c-dark-soft);
+      padding: 1.25rem 1.4rem;
+      border-left: 2px solid var(--c-red);
+    }
+    .findus-info-icon {
+      color: var(--c-red);
+      font-size: 1rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+      width: 18px;
+    }
+    .findus-info-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 0.35rem;
+    }
+    .findus-info-value {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.75;
+    }
+    .findus-info-value a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .findus-info-value a:hover { color: var(--c-gold); }
+    @media (max-width: 900px) {
+      .findus-grid { grid-template-columns: 1fr; }
+      .findus-map { height: 300px; }
+    }
 
     /* ─────────────────── FOOTER ─────────────────── */
     .footer {
@@ -497,7 +709,6 @@
       .about-img-wrap { order: -1; }
       .about-img-wrap img { height: 300px; }
       .process-grid { grid-template-columns: 1fr 1fr; }
-      .gallery-grid { grid-template-columns: 1fr; }
       .footer-body { grid-template-columns: 1fr; gap: 2rem; }
     }
     @media (max-width: 768px) {
@@ -518,7 +729,7 @@
     <li><a href="#about" data-i18n="nav_about">Om Oss</a></li>
     <li><a href="#process" data-i18n="nav_process">Vår Process</a></li>
     <li><a href="#menu" data-i18n="nav_menu">Meny</a></li>
-    <li><a href="#gallery" data-i18n="nav_gallery">Galleri</a></li>
+    <li><a href="#hitta-oss" data-i18n="nav_gallery">Hitta oss</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Kontakt</a></li>
     <li><a href="#menu" class="nav-cta" data-i18n="nav_cta">Meny</a></li>
     <li><button class="lang-toggle" id="lang-toggle" onclick="toggleLang()">EN</button></li>
@@ -565,8 +776,8 @@
 
       <div class="about-img-wrap">
         <img
-          src="bombom.jpg"
-          alt="Vår Historia"
+          src="https://images.unsplash.com/photo-1684864115205-242c064363e6?w=800&q=85&auto=format&fit=crop"
+          alt="Kebabmakaren skär kött vid spettet"
         />
         <div class="about-badge">
           <span class="big">30+</span>
@@ -588,11 +799,6 @@
           <div>
             <div class="stat-num">4.1</div>
             <div class="stat-lbl" data-i18n="about_rating">Betyg</div>
-          </div>
-          <div style="width:1px; background:rgba(255,255,255,0.15); align-self:stretch;"></div>
-          <div>
-            <div class="stat-num">50+</div>
-            <div class="stat-lbl" data-i18n="about_guests">Nöjda gäster / dag</div>
           </div>
         </div>
       </div>
@@ -633,41 +839,176 @@
   </div>
 </section>
 
-<!-- ══════════ MENU ══════════ -->
-<section id="menu" class="section menu-section">
+<!-- ══════════ VAD VI ERBJUDER ══════════ -->
+<section class="section offers-section">
   <div class="container">
-    <span class="eyebrow" data-i18n="menu_eyebrow">Vår Meny</span>
-    <h2 class="heading" style="color:#fff; margin-top:0.65rem; margin-bottom:2.5rem;" data-i18n="menu_heading">Vad vill du ha idag?</h2>
-    <div class="menu-img-wrap">
-      <img src="meny.jpg" alt="Kebab House meny" />
+    <span class="eyebrow" data-i18n="offers_eyebrow">Hos Oss</span>
+    <h2 class="heading" style="color:#fff; margin-top:0.65rem; margin-bottom:0.75rem;" data-i18n="offers_heading">Vad vi erbjuder</h2>
+    <div class="offers-grid">
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class="fa-solid fa-wheelchair"></i></div>
+        <h3 class="offer-title" data-i18n="offer1_title">Tillgänglighet</h3>
+        <ul class="offer-list">
+          <li data-i18n="offer1_1">Rullstolsanpassad entré</li>
+        </ul>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class="fa-solid fa-door-open"></i></div>
+        <h3 class="offer-title" data-i18n="offer2_title">Servicealternativ</h3>
+        <ul class="offer-list">
+          <li data-i18n="offer2_1">Äta på plats</li>
+          <li data-i18n="offer2_2">Avhämtning</li>
+        </ul>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class="fa-solid fa-star"></i></div>
+        <h3 class="offer-title" data-i18n="offer3_title">Populärt för</h3>
+        <ul class="offer-list">
+          <li data-i18n="offer3_1">Middag</li>
+          <li data-i18n="offer3_2">Ensam</li>
+        </ul>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+        <h3 class="offer-title" data-i18n="offer4_title">Utbud</h3>
+        <ul class="offer-list">
+          <li data-i18n="offer4_1">Cocktails</li>
+          <li data-i18n="offer4_2">Halalmat</li>
+          <li data-i18n="offer4_3">Sen kvällsmat</li>
+          <li data-i18n="offer4_4">Snabbmat</li>
+        </ul>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class="fa-solid fa-chair"></i></div>
+        <h3 class="offer-title" data-i18n="offer5_title">Matsal</h3>
+        <ul class="offer-list">
+          <li data-i18n="offer5_1">Middag</li>
+          <li data-i18n="offer5_2">Sittplatser</li>
+        </ul>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class="fa-solid fa-couch"></i></div>
+        <h3 class="offer-title" data-i18n="offer6_title">Atmosfär</h3>
+        <ul class="offer-list">
+          <li data-i18n="offer6_1">Avslappnad</li>
+          <li data-i18n="offer6_2">Välkomnande</li>
+        </ul>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class="fa-solid fa-users"></i></div>
+        <h3 class="offer-title" data-i18n="offer7_title">Sällskap</h3>
+        <ul class="offer-list">
+          <li data-i18n="offer7_1">Grupper välkomna</li>
+          <li data-i18n="offer7_2">Större sällskap</li>
+        </ul>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class="fa-solid fa-calendar-check"></i></div>
+        <h3 class="offer-title" data-i18n="offer8_title">Planering</h3>
+        <ul class="offer-list">
+          <li data-i18n="offer8_1">Tar emot reservationer</li>
+        </ul>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class="fa-solid fa-credit-card"></i></div>
+        <h3 class="offer-title" data-i18n="offer9_title">Betalning</h3>
+        <ul class="offer-list">
+          <li data-i18n="offer9_1">Bankkort</li>
+          <li data-i18n="offer9_2">NFC &amp; Swish</li>
+          <li data-i18n="offer9_3">Kreditkort</li>
+        </ul>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class="fa-solid fa-child"></i></div>
+        <h3 class="offer-title" data-i18n="offer10_title">Barn</h3>
+        <ul class="offer-list">
+          <li data-i18n="offer10_1">Barnvänlig</li>
+          <li data-i18n="offer10_2">Barnstolar</li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ══════════ GALLERY ══════════ -->
-<section id="gallery" class="section gallery-section">
+<!-- ══════════ MENU ══════════ -->
+<section id="menu" class="section menu-section">
   <div class="container">
-    <span class="eyebrow" data-i18n="gallery_eyebrow">Galleri</span>
-    <h2 class="heading" data-i18n="gallery_heading">Smakfulla ögonblick</h2>
+    <span class="eyebrow" data-i18n="menu_eyebrow">Vår Meny</span>
+    <h2 class="heading" style="color:#fff; margin-top:0.65rem; margin-bottom:1rem;" data-i18n="menu_heading">Vad vill du ha idag?</h2>
+    <p style="font-size:0.88rem; color:rgba(255,255,255,0.5); font-weight:300; max-width:500px; line-height:1.85; margin-bottom:2.5rem;" data-i18n="menu_desc">Utforska vår fullständiga meny med kebab, pizzor, hamburgare, tillbehör, såser och drycker – något för alla smaker och tillfällen.</p>
+    <div class="menu-btn-wrap">
+      <button class="btn btn-red" onclick="openMenu()">
+        <i class="fa-solid fa-utensils"></i> <span data-i18n="menu_view_btn">Visa meny</span>
+      </button>
+      <a href="https://www.foodora.se/restaurant/s8fw/kebab-house-sodertalje" target="_blank" rel="noopener" class="btn btn-pink">
+        <i class="fa-solid fa-bag-shopping"></i> <span data-i18n="menu_order_btn">Beställ nu</span>
+      </a>
+    </div>
   </div>
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <img
-        src="kebab-tallrik-ris-potatismos.jpg"
-        alt="Kebab tallrik"
-      />
-    </div>
-    <div class="gallery-item">
-      <img
-        src="creamy_roasted_red_91087_16x9.jpg"
-        alt="Pasta"
-      />
-    </div>
-    <div class="gallery-item">
-      <img
-        src="istockphoto-860985288-612x612.jpg"
-        alt="Kebab"
-      />
+</section>
+
+<!-- ══════════ HITTA OSS ══════════ -->
+<section id="hitta-oss" class="section findus-section">
+  <div class="container">
+    <span class="eyebrow" data-i18n="findus_eyebrow">Besök Oss</span>
+    <h2 class="heading" style="color:#fff; margin-top:0.65rem; margin-bottom:3rem;" data-i18n="findus_heading">Hitta oss</h2>
+    <div class="findus-grid">
+
+      <div class="findus-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2044.0!2d17.6269!3d59.1955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f0b2e7e7e7e7f%3A0x0!2sK%C3%B6pmangatan+12%2C+151+71+S%C3%B6dert%C3%A4lje!5e0!3m2!1ssv!2sse!4v1"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Kebab House Södertälje karta">
+        </iframe>
+      </div>
+
+      <div class="findus-info">
+        <div class="findus-info-card">
+          <div class="findus-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <div class="findus-info-label" data-i18n="findus_addr_lbl">Adress</div>
+            <div class="findus-info-value">Köpmangatan 12<br/>151 71 Södertälje</div>
+          </div>
+        </div>
+        <div class="findus-info-card">
+          <div class="findus-info-icon"><i class="fa-solid fa-phone"></i></div>
+          <div>
+            <div class="findus-info-label" data-i18n="findus_phone_lbl">Telefon</div>
+            <div class="findus-info-value"><a href="tel:0855039417">08-550 394 17</a></div>
+          </div>
+        </div>
+        <div class="findus-info-card">
+          <div class="findus-info-icon"><i class="fa-regular fa-clock"></i></div>
+          <div>
+            <div class="findus-info-label" data-i18n="findus_hours_lbl">Öppettider</div>
+            <div class="findus-info-value">
+              Mån–Tor: 11:00–21:00<br/>
+              Fre–Lör: 11:00–03:00<br/>
+              Sön: 12:00–21:00
+            </div>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Köpmangatan+12,+151+71+Södertälje" target="_blank" rel="noopener" class="btn btn-red" style="margin-top:0.5rem; align-self:flex-start;">
+          <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="findus_dir_btn">Vägbeskrivning</span>
+        </a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -679,10 +1020,11 @@
     <!-- Brand -->
     <div class="footer-brand">
       <img src="kebablogo.jpg" alt="Kebab House" />
-      <p data-i18n="footer_brand_p">Genuin smak och hjärtlig service. Södertäljes favorit för kebab – välkommen in.</p>
+      <p data-i18n="footer_brand_p">Välkommen in!</p>
       <div class="footer-social">
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/kebabhouse.se/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/KebabHouseSodertalje" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.foodora.se/restaurant/s8fw/kebab-house-sodertalje" aria-label="Foodora" target="_blank" rel="noopener noreferrer" style="width:auto;padding:0 10px;border-radius:18px;font-size:0.72rem;font-weight:700;letter-spacing:0.03em;">Foodora</a>
       </div>
     </div>
 
@@ -692,7 +1034,7 @@
       <ul class="footer-links">
         <li><a href="#about" data-i18n="nav_about">Om Oss</a></li>
         <li><a href="#process" data-i18n="nav_process">Vår Process</a></li>
-        <li><a href="#gallery" data-i18n="nav_gallery">Galleri</a></li>
+        <li><a href="#hitta-oss" data-i18n="nav_gallery">Hitta oss</a></li>
         <li><a href="#contact" data-i18n="nav_contact">Kontakt</a></li>
       </ul>
     </div>
@@ -723,13 +1065,169 @@
   </div>
 </footer>
 
+<!-- ══════════ MENU OVERLAY ══════════ -->
+<div id="menu-overlay" class="menu-overlay" aria-hidden="true">
+  <button class="menu-close" onclick="closeMenu()" aria-label="Stäng meny">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <div class="menu-overlay-inner">
+    <h2 class="menu-overlay-title" data-i18n="menu_overlay_title">Meny</h2>
+
+    <!-- Populärt -->
+    <div class="menu-category">
+      <div class="menu-category-title" data-i18n="menucat_popular">Populärt</div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabtallrik (fläskkött)</span><span class="menu-item-desc">Gyroskött.</span></div><span class="menu-item-price">från 120 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabrulle (fläskkött)</span><span class="menu-item-desc">Gyroskött.</span></div><span class="menu-item-price">från 120 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Nököttstallrik</span><span class="menu-item-desc">Välj tillbehör i nästa steg.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Chili Cheese</span><span class="menu-item-desc">Välj antal i nästa steg.</span></div><span class="menu-item-price">från 28 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebab (fläskkött) Med Bröd</span><span class="menu-item-desc">Gyroskött.</span></div><span class="menu-item-price">från 95 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Husets</span><span class="menu-item-desc">Tomatsås, ost, kebabkött, feferoni, lök och kebabsås.</span></div><span class="menu-item-price">från 125 kr</span></div>
+    </div>
+
+    <div class="menu-divider"></div>
+
+    <!-- Pizzor -->
+    <div class="menu-category">
+      <div class="menu-category-title" data-i18n="menucat_pizzas">Pizzor</div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Capricciosa</span><span class="menu-item-desc">Tomatsås, ost, skinka och champinjoner.</span></div><span class="menu-item-price">från 115 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Vesuvio</span><span class="menu-item-desc">Tomatsås, ost och skinka.</span></div><span class="menu-item-price">från 115 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Calzone</span><span class="menu-item-desc">Inbakad. Tomatsås, ost och skinka.</span></div><span class="menu-item-price">från 115 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Hawaii</span><span class="menu-item-desc">Tomatsås, ost, skinka och ananas.</span></div><span class="menu-item-price">från 115 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">La Bussola</span><span class="menu-item-desc">Tomatsås, ost, skinka och räkor.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Da Vinci</span><span class="menu-item-desc">Tomatsås, ost, skinka, champinjoner, lök och räkor.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Primavera</span><span class="menu-item-desc">Tomatsås, ost, salami och lök.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Azteka</span><span class="menu-item-desc">Tomatsås, ost, skinka, jalapeños, tacosås och vitlökssås.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Vegetarisk</span><span class="menu-item-desc">Tomatsås, ost, oliver, lök, paprika och tomat.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Al Pollo</span><span class="menu-item-desc">Tomatsås, ost, kyckling, lök, ananas, tomat och curry.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Batman</span><span class="menu-item-desc">Tomatsås, ost, kebabkött, skinka, lök och kebabsås.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Al Tonno</span><span class="menu-item-desc">Tomatsås, ost, tonfisk och lök.</span></div><span class="menu-item-price">från 110 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">La Greco</span><span class="menu-item-desc">Halvinbakad. Tomatsås, ost, kebabkött, isbergssallad, lök och kebabsås.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Husets</span><span class="menu-item-badge" data-i18n="menu_badge_popular">Populärt</span><span class="menu-item-desc">Tomatsås, ost, kebabkött, feferoni, lök och kebabsås.</span></div><span class="menu-item-price">från 125 kr</span></div>
+    </div>
+
+    <div class="menu-divider"></div>
+
+    <!-- Kebabrätter -->
+    <div class="menu-category">
+      <div class="menu-category-title" data-i18n="menucat_kebab">Kebabrätter</div>
+      <div class="menu-category-note" data-i18n="menucat_kebab_note">Ingår isbergssallad, lök, tomat och feferoni.</div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebab (fläskkött) Med Bröd</span><span class="menu-item-badge" data-i18n="menu_badge_popular">Populärt</span><span class="menu-item-desc">Gyroskött.</span></div><span class="menu-item-price">från 95 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebab (nötkött) Med Bröd</span><span class="menu-item-desc">Kebabkött.</span></div><span class="menu-item-price">från 100 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabrulle (fläskkött)</span><span class="menu-item-badge" data-i18n="menu_badge_popular">Populärt</span><span class="menu-item-desc">Gyroskött.</span></div><span class="menu-item-price">från 120 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabrulle (nötkött)</span><span class="menu-item-desc">Kebabkött.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabrulle (fläskkött) Med Pommes Frites</span><span class="menu-item-desc">Gyroskött.</span></div><span class="menu-item-price">från 150 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabrulle (nötkött) Med Pommes Frites</span><span class="menu-item-desc">Kebabkött.</span></div><span class="menu-item-price">från 155 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabrulle (nötkött) Meny</span><span class="menu-item-desc">Kebabkött. Med pommes och valfri dryck 33 cl.</span></div><span class="menu-item-price">165 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabrulle (fläskkött) Meny</span><span class="menu-item-desc">Gyroskött. Med pommes och valfri dryck 33 cl.</span></div><span class="menu-item-price">160 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabtallrik (fläskkött)</span><span class="menu-item-badge" data-i18n="menu_badge_popular">Populärt</span><span class="menu-item-desc">Gyroskött.</span></div><span class="menu-item-price">från 120 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Nököttstallrik</span><span class="menu-item-badge" data-i18n="menu_badge_popular">Populärt</span><span class="menu-item-desc">Välj tillbehör i nästa steg.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabsallad (fläskkött)</span><span class="menu-item-desc">Gyroskött.</span></div><span class="menu-item-price">från 120 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabsallad (nötkött)</span><span class="menu-item-desc">Kebabkött.</span></div><span class="menu-item-price">från 110 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Falafelrulle</span><span class="menu-item-desc">Med grönsaker.</span></div><span class="menu-item-price">105 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Falafeltallrik</span><span class="menu-item-desc">Välj tillbehör i nästa steg.</span></div><span class="menu-item-price">från 110 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Gyrossallad</span><span class="menu-item-desc">Fläskkarré.</span></div><span class="menu-item-price">120 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kycklingtallrik</span><span class="menu-item-desc">Saftig kycklingtallrik med färska grönsaker, kryddad efter traditionell kebabstil.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Pommesrulle</span><span class="menu-item-desc">Välj med gyroskött eller nötkött.</span></div><span class="menu-item-price">från 120 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Gyrosrulle Med Pommes Frites</span><span class="menu-item-desc">Fläskkarré.</span></div><span class="menu-item-price">150 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabtallrik (fläskkött) – Barn</span><span class="menu-item-desc">Gyroskött. Välj tillbehör i nästa steg.</span></div><span class="menu-item-price">från 90 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Gyrostallrik – Barn</span><span class="menu-item-desc">Fläskkarré. Välj tillbehör i nästa steg.</span></div><span class="menu-item-price">från 90 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabtallrik (nötkött) – Barn</span><span class="menu-item-desc">Kebabkött. Välj tillbehör i nästa steg.</span></div><span class="menu-item-price">från 90 kr</span></div>
+    </div>
+
+    <div class="menu-divider"></div>
+
+    <!-- Hamburgare -->
+    <div class="menu-category">
+      <div class="menu-category-title" data-i18n="menucat_burgers">Hamburgare</div>
+      <div class="menu-category-note" data-i18n="menucat_burgers_note">Ingår isbergssallad, lök och tomat.</div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Hamburgertallrik</span><span class="menu-item-desc">Med pommes frites. Välj storlek i nästa steg.</span></div><span class="menu-item-price">från 95 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Halloumiburger</span><span class="menu-item-desc">Halloumiburgare med pommes.</span></div><span class="menu-item-price">120 kr</span></div>
+    </div>
+
+    <div class="menu-divider"></div>
+
+    <!-- A La Carte -->
+    <div class="menu-category">
+      <div class="menu-category-title" data-i18n="menucat_alacarte">A' La Carte</div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Halloumitallrik</span><span class="menu-item-desc">Välj tillbehör i nästa steg.</span></div><span class="menu-item-price">från 125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Chicken Nuggets</span><span class="menu-item-desc">Välj tillbehör i nästa steg.</span></div><span class="menu-item-price">från 105 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kycklingvingar</span><span class="menu-item-desc">Välj tillbehör i nästa steg.</span></div><span class="menu-item-price">från 90 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Fish N' Chips</span><span class="menu-item-desc">Med pommes frites.</span></div><span class="menu-item-price">125 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kycklingtallrik</span><span class="menu-item-desc">Serveras med ris.</span></div><span class="menu-item-price">130 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Chicken Strips</span><span class="menu-item-desc">Friterade kycklingstavar.</span></div><span class="menu-item-price">140 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Crispy Kycklingburgare</span><span class="menu-item-desc">Sprödstekt kycklingburgare med saftig filé och krispiga pommes frites.</span></div><span class="menu-item-price">135 kr</span></div>
+    </div>
+
+    <div class="menu-divider"></div>
+
+    <!-- Tillbehör -->
+    <div class="menu-category">
+      <div class="menu-category-title" data-i18n="menucat_sides">Tillbehör</div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Pizzasallad</span><span class="menu-item-desc">Vitkålssallad med vinägrette.</span></div><span class="menu-item-price">15 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Chili Cheese</span><span class="menu-item-badge" data-i18n="menu_badge_popular">Populärt</span><span class="menu-item-desc">Välj antal i nästa steg.</span></div><span class="menu-item-price">från 28 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Mozzarellasticks</span><span class="menu-item-desc">Välj antal i nästa steg.</span></div><span class="menu-item-price">från 28 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Nacho Cheese</span><span class="menu-item-desc">Välj antal i nästa steg.</span></div><span class="menu-item-price">från 28 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Lökringar</span><span class="menu-item-desc">Välj antal i nästa steg.</span></div><span class="menu-item-price">från 28 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Chicken Wings</span><span class="menu-item-desc">Välj antal i nästa steg.</span></div><span class="menu-item-price">från 39 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Pitabröd</span><span class="menu-item-desc">Med blandade grönsaker.</span></div><span class="menu-item-price">från 10 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Choklad &amp; Bananpizza</span><span class="menu-item-desc">En söt pizza med choklad och banan.</span></div><span class="menu-item-price">75 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Chicken Nuggets 3 st</span><span class="menu-item-desc">Tre krispiga kycklingbitar, perfekt för dipp.</span></div><span class="menu-item-price">28 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Chicken Nuggets 5 st</span><span class="menu-item-desc">Krispiga kycklingbitar, perfekt för dipp.</span></div><span class="menu-item-price">38 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Friterade Pommes</span><span class="menu-item-desc">Gyllene och krispiga pommes serverade varma med salt.</span></div><span class="menu-item-price">40 kr</span></div>
+    </div>
+
+    <div class="menu-divider"></div>
+
+    <!-- Såser -->
+    <div class="menu-category">
+      <div class="menu-category-title" data-i18n="menucat_sauces">Såser</div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Kebabsås</span><span class="menu-item-desc">Kryddig sås, passar perfekt till grillat kött och grönsaker.</span></div><span class="menu-item-price">15 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Vitlökssås</span><span class="menu-item-desc">Kall yoghurtsås med vitlöksmak.</span></div><span class="menu-item-price">15 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Remouladsås</span><span class="menu-item-desc">Kryddig sås med majonnäs, senap och örter.</span></div><span class="menu-item-price">15 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Currysås</span><span class="menu-item-desc">En kryddig sås med currysmak.</span></div><span class="menu-item-price">12 kr</span></div>
+    </div>
+
+    <div class="menu-divider"></div>
+
+    <!-- Efterrätter -->
+    <div class="menu-category">
+      <div class="menu-category-title" data-i18n="menucat_desserts">Efterrätter</div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Choklad &amp; Banan Pizza</span><span class="menu-item-desc">En söt pizza med choklad och banan, perfekt för dessertälskare.</span></div><span class="menu-item-price">75 kr</span></div>
+    </div>
+
+    <div class="menu-divider"></div>
+
+    <!-- Drycker -->
+    <div class="menu-category">
+      <div class="menu-category-title" data-i18n="menucat_drinks">Drycker</div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Coca-Cola Original Taste 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Coca-Cola Zero 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Trocadero 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Fanta Orange 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Fanta Exotic 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Sprite 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">MER Apelsin 20 cl</span></div><span class="menu-item-price">15 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">MER Päron 20 cl</span></div><span class="menu-item-price">15 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Mer Jordgubb</span></div><span class="menu-item-price">15 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Bonaqua Naturell 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Bonaqua Citron Lime 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Bonaqua Hallon Lime 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Ramlösa Granatäpple 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Ramlösa Citrus 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Ramlösa Päron 33 cl</span></div><span class="menu-item-price">20 kr</span></div>
+      <div class="menu-item"><div class="menu-item-left"><span class="menu-item-name">Powerking</span></div><span class="menu-item-price">30 kr</span></div>
+    </div>
+
+  </div>
+</div>
+
 <script>
   const i18n = {
     sv: {
       nav_about:       'Om Oss',
       nav_process:     'Vår Process',
       nav_menu:        'Meny',
-      nav_gallery:     'Galleri',
+      nav_gallery:     'Hitta oss',
       nav_contact:     'Kontakt',
       nav_cta:         'Meny',
       hero_tagline:    'Den bästa kebaben i stan!',
@@ -742,7 +1240,6 @@
       about_p2:        'Vår filosofi är enkel: färska råvaror, genuin smak och hjärtlig service. Från snabb lunch till sen kvällsmåltid på fredag och lördag – vi finns alltid här för dig.',
       about_reviews:   'Google-recensioner',
       about_rating:    'Betyg',
-      about_guests:    'Nöjda gäster / dag',
       process_eyebrow: 'Vår Process',
       process_heading: 'Hemligheten bakom smaken',
       process1_title:  'Färska råvaror',
@@ -752,12 +1249,65 @@
       process3_title:  'Erfarna händer',
       process3_desc:   'Med lång erfarenhet i köket levererar vi konsekvent hög kvalitet i varje portion vi serverar.',
       process4_title:  'Hjärtlig service',
-      process4_desc:   'Vår personal välkomnar dig med ett leende – vi ser till att ditt besök blir minnesvärdt.',
+      process4_desc:   'Vår personal välkomnar dig med ett leende – vi ser till att ditt besök blir minnesvärt.',
       menu_eyebrow:    'Vår Meny',
       menu_heading:    'Vad vill du ha idag?',
-      gallery_eyebrow: 'Galleri',
-      gallery_heading: 'Smakfulla ögonblick',
-      footer_brand_p:  'Genuin smak och hjärtlig service. Södertäljes favorit för kebab – välkommen in.',
+      menu_desc:       'Utforska vår fullständiga meny med kebab, pizzor, hamburgare, tillbehör, såser och drycker – något för alla smaker och tillfällen.',
+      menu_view_btn:   'Visa meny',
+      menu_order_btn:  'Beställ nu',
+      offers_eyebrow:  'Hos Oss',
+      offers_heading:  'Vad vi erbjuder',
+      offer1_title:    'Tillgänglighet',
+      offer1_1:        'Rullstolsanpassad entré',
+      offer2_title:    'Servicealternativ',
+      offer2_1:        'Äta på plats',
+      offer2_2:        'Avhämtning',
+      offer3_title:    'Populärt för',
+      offer3_1:        'Middag',
+      offer3_2:        'Ensam',
+      offer4_title:    'Utbud',
+      offer4_1:        'Cocktails',
+      offer4_2:        'Halalmat',
+      offer4_3:        'Sen kvällsmat',
+      offer4_4:        'Snabbmat',
+      offer5_title:    'Matsal',
+      offer5_1:        'Middag',
+      offer5_2:        'Sittplatser',
+      offer6_title:    'Atmosfär',
+      offer6_1:        'Avslappnad',
+      offer6_2:        'Välkomnande',
+      offer7_title:    'Sällskap',
+      offer7_1:        'Grupper välkomna',
+      offer7_2:        'Större sällskap',
+      offer8_title:    'Planering',
+      offer8_1:        'Tar emot reservationer',
+      offer9_title:    'Betalning',
+      offer9_1:        'Bankkort',
+      offer9_2:        'NFC &amp; Swish',
+      offer9_3:        'Kreditkort',
+      offer10_title:   'Barn',
+      offer10_1:       'Barnvänlig',
+      offer10_2:       'Barnstolar',
+      findus_eyebrow:  'Besök Oss',
+      findus_heading:  'Hitta oss',
+      findus_addr_lbl: 'Adress',
+      findus_phone_lbl:'Telefon',
+      findus_hours_lbl:'Öppettider',
+      findus_dir_btn:  'Vägbeskrivning',
+      menu_overlay_title: 'Meny',
+      menucat_popular: 'Populärt',
+      menucat_pizzas:  'Pizzor',
+      menucat_kebab:   'Kebabrätter',
+      menucat_kebab_note: 'Ingår isbergssallad, lök, tomat och feferoni.',
+      menucat_burgers: 'Hamburgare',
+      menucat_burgers_note: 'Ingår isbergssallad, lök och tomat.',
+      menucat_alacarte:'A\' La Carte',
+      menucat_sides:   'Tillbehör',
+      menucat_sauces:  'Såser',
+      menucat_desserts:'Efterrätter',
+      menucat_drinks:  'Drycker',
+      menu_badge_popular: 'Populärt',
+      footer_brand_p:  'Välkommen in!',
       footer_quicklinks:'Snabblänkar',
       footer_contact_col:'Kontakt',
       footer_hours_title:'Öppettider',
@@ -768,7 +1318,7 @@
       nav_about:       'About Us',
       nav_process:     'Our Process',
       nav_menu:        'Menu',
-      nav_gallery:     'Gallery',
+      nav_gallery:     'Find Us',
       nav_contact:     'Contact',
       nav_cta:         'Menu',
       hero_tagline:    'The best kebab in town!',
@@ -778,10 +1328,9 @@
       about_heading:   'A Taste of History',
       about_badge:     'Years of<br/>Experience',
       about_p1:        'Kebab House is Södertälje\'s heart for authentic kebab. For decades we have served guests with the finest halal-certified meat, prepared with love and craftsmanship.',
-      about_p2:        'Our philosophy is simple: fresh ingredients, genuine taste, and warm service. From a quick lunch to a late Friday night meal – we are always here for you.',
+      about_p2:        'Our philosophy is simple: fresh ingredients, genuine taste, and warm service. From a quick lunch to a late Friday or Saturday night meal – we are always here for you.',
       about_reviews:   'Google Reviews',
       about_rating:    'Rating',
-      about_guests:    'Happy guests / day',
       process_eyebrow: 'Our Process',
       process_heading: 'The Secret Behind the Taste',
       process1_title:  'Fresh Ingredients',
@@ -794,8 +1343,61 @@
       process4_desc:   'Our staff welcomes you with a smile – we make sure your visit is one to remember.',
       menu_eyebrow:    'Our Menu',
       menu_heading:    'What Would You Like Today?',
-      gallery_eyebrow: 'Gallery',
-      gallery_heading: 'Flavorful Moments',
+      menu_desc:       'Explore our full menu with kebab, pizzas, burgers, sides, sauces and drinks – something for every taste and occasion.',
+      menu_view_btn:   'View Menu',
+      menu_order_btn:  'Order Now',
+      offers_eyebrow:  'With Us',
+      offers_heading:  'What We Offer',
+      offer1_title:    'Accessibility',
+      offer1_1:        'Wheelchair accessible entrance',
+      offer2_title:    'Service Options',
+      offer2_1:        'Dine in',
+      offer2_2:        'Takeaway',
+      offer3_title:    'Popular For',
+      offer3_1:        'Dinner',
+      offer3_2:        'Solo dining',
+      offer4_title:    'Offerings',
+      offer4_1:        'Cocktails',
+      offer4_2:        'Halal food',
+      offer4_3:        'Late night food',
+      offer4_4:        'Fast food',
+      offer5_title:    'Dining Room',
+      offer5_1:        'Dinner',
+      offer5_2:        'Seating',
+      offer6_title:    'Atmosphere',
+      offer6_1:        'Relaxed',
+      offer6_2:        'Welcoming',
+      offer7_title:    'Groups',
+      offer7_1:        'Groups welcome',
+      offer7_2:        'Larger parties',
+      offer8_title:    'Planning',
+      offer8_1:        'Accepts reservations',
+      offer9_title:    'Payment',
+      offer9_1:        'Debit card',
+      offer9_2:        'NFC &amp; Swish',
+      offer9_3:        'Credit card',
+      offer10_title:   'Children',
+      offer10_1:       'Child-friendly',
+      offer10_2:       'High chairs',
+      findus_eyebrow:  'Visit Us',
+      findus_heading:  'Find Us',
+      findus_addr_lbl: 'Address',
+      findus_phone_lbl:'Phone',
+      findus_hours_lbl:'Opening Hours',
+      findus_dir_btn:  'Directions',
+      menu_overlay_title: 'Menu',
+      menucat_popular: 'Popular',
+      menucat_pizzas:  'Pizzas',
+      menucat_kebab:   'Kebab Dishes',
+      menucat_kebab_note: 'Includes iceberg lettuce, onion, tomato and pepperoni.',
+      menucat_burgers: 'Burgers',
+      menucat_burgers_note: 'Includes iceberg lettuce, onion and tomato.',
+      menucat_alacarte:'A\' La Carte',
+      menucat_sides:   'Sides',
+      menucat_sauces:  'Sauces',
+      menucat_desserts:'Desserts',
+      menucat_drinks:  'Drinks',
+      menu_badge_popular: 'Popular',
       footer_brand_p:  'Genuine taste and warm service. Södertälje\'s favourite for kebab – welcome in.',
       footer_quicklinks:'Quick Links',
       footer_contact_col:'Contact',
@@ -827,6 +1429,24 @@
 
   // Default to Swedish on load
   setLanguage('sv');
+
+  function openMenu() {
+    const overlay = document.getElementById('menu-overlay');
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    const overlay = document.getElementById('menu-overlay');
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMenu();
+  });
 </script>
 
 </body>
